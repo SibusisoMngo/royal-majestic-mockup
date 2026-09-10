@@ -44,10 +44,15 @@ ScrollTrigger, Phosphor icons. Nothing is vendored.
 
 ## Design decisions
 
-**Warm ivory, with four deliberate dark blocks.** Everything you read sits on
-ivory. The hero, the 3D suite, the three houses and the events room are
-photography and light, so they run full bleed and dark. An earlier all dark
-version was rejected and it was the right call.
+**A hero, then a run of full bleed panels.** Reference is
+[Atlantis The Royal](https://www.atlantis.com/dubai/atlantis-the-royal). Each
+panel is one photograph, a small kicker, one headline, one line and one link.
+The photography carries the page. Two ivory blocks, the concierge and book
+direct, break the run where you actually have to read and do something.
+
+**Light Cormorant Garamond for display.** Chosen because the group's own
+wordmark is a serif. It is the brand's letterform, not a default reach for
+something that feels expensive.
 
 **One accent.** A gold sampled from the existing RM logo. On ivory it deepens to
 bronze (`#7C5714`) so small text still passes contrast. There is no second
@@ -55,9 +60,9 @@ accent anywhere on the page.
 
 **Shapes.** Surfaces are 2px. Anything you tap is a pill.
 
-**Motion has to earn its place.** Scroll weight from Lenis, a hero parallax for
-depth, one pinned horizontal pan across the three properties, and the reveal
-cascade. Everything degrades under `prefers-reduced-motion`. There are no scroll
+**Motion has to earn its place.** Scroll weight from Lenis, every panel image
+easing out of a slight push in as it passes, copy drifting slower than the panel
+it sits on, and the reveal cascade. Everything degrades under `prefers-reduced-motion`. There are no scroll
 event listeners anywhere: IntersectionObserver and ScrollTrigger only.
 
 ---

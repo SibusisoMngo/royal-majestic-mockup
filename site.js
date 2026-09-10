@@ -154,52 +154,32 @@
   if (window.gsap && window.ScrollTrigger) {
     gsap.registerPlugin(ScrollTrigger);
 
-    /* hero parallax. Motivation: depth. The image drifts slower than
-       the copy so the hero reads as a room, not a picture. */
     if (!reduce) {
-      gsap.to("#heroMedia", {
-        yPercent: 13, ease: "none",
-        scrollTrigger: { trigger: "#hero", start: "top top", end: "bottom top", scrub: true }
+      /* every panel image eases out of a slight push in as it passes.
+         Motivation: storytelling. It is the one move that makes a run of
+         full bleed photographs read as a sequence rather than a slideshow. */
+      gsap.utils.toArray(".stagey__bg img").forEach(function (img) {
+        var panel = img.closest(".stagey");
+        gsap.fromTo(img,
+          { scale: 1.18 },
+          { scale: 1, ease: "none",
+            scrollTrigger: { trigger: panel, start: "top bottom", end: "bottom top", scrub: true } });
       });
-      gsap.to("#heroCopy", {
-        yPercent: -18, opacity: .25, ease: "none",
-        scrollTrigger: { trigger: "#hero", start: "top top", end: "bottom top", scrub: true }
-      });
-    }
 
-    /* houses: horizontal pan.
-       Motivation: storytelling. Three properties read as one journey
-       across two cities instead of three stacked cards. */
-    var mqDesktop = window.matchMedia("(min-width: 768px)");
-    var panCtx = null;
-    function buildPan() {
-      if (panCtx) { panCtx.revert(); panCtx = null; }
-      if (reduce || !mqDesktop.matches) return;
-      panCtx = gsap.context(function () {
-        var track = document.getElementById("track");
-        var distance = track.scrollWidth - window.innerWidth;
-        if (distance <= 0) return;
-        gsap.to(track, {
-          x: -distance, ease: "none",
-          scrollTrigger: {
-            trigger: "#houses",
-            start: "top top",
-            end: function () { return "+=" + distance; },
-            pin: true, scrub: 1, invalidateOnRefresh: true
-          }
+      /* the copy drifts up a little slower than the panel it sits on.
+         Motivation: depth. */
+      gsap.utils.toArray(".stagey:not(.suite) .stagey__copy").forEach(function (copy) {
+        gsap.to(copy, {
+          yPercent: -14, ease: "none",
+          scrollTrigger: { trigger: copy.closest(".stagey"), start: "top bottom", end: "bottom top", scrub: true }
         });
       });
-    }
-    buildPan();
-    mqDesktop.addEventListener("change", buildPan);
 
-    /* the wordmark holds while the group statement passes behind it.
-       Motivation: hierarchy. One moment where the brand is the page. */
-    if (!reduce) {
-      gsap.fromTo("#markInner",
-        { scale: .82, opacity: .18 },
-        { scale: 1, opacity: 1, ease: "none",
-          scrollTrigger: { trigger: "#mark", start: "top 85%", end: "bottom 60%", scrub: .6 } });
+      /* the hero holds while the next panel arrives over it */
+      gsap.to("#hero .stagey__copy", {
+        opacity: 0, yPercent: -22, ease: "none",
+        scrollTrigger: { trigger: "#hero", start: "top top", end: "bottom top", scrub: true }
+      });
     }
   }
 
