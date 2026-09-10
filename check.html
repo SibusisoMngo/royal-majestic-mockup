@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3D check</title>
+<style>
+  body{ margin:0; background:#F5F2EA; color:#1B1713;
+        font:15px/1.6 ui-sans-serif, system-ui, -apple-system, sans-serif; padding:28px 20px 60px; }
+  .wrap{ max-width:680px; margin-inline:auto; }
+  h1{ font-size:22px; margin:0 0 6px; }
+  p.sub{ margin:0 0 24px; color:#7A7165; font-size:14px; }
+  .row{ display:flex; gap:12px; align-items:flex-start; padding:14px 0; border-bottom:1px solid rgba(27,23,19,.12); }
+  .dot{ flex:0 0 auto; width:20px; height:20px; border-radius:50%; display:grid; place-items:center;
+        color:#fff; font-size:12px; font-weight:700; margin-top:1px; }
+  .ok{ background:#2E7D4F } .bad{ background:#B3261E } .wait{ background:#9A8A6A }
+  .k{ font-weight:600 } .v{ color:#4B4339; font-size:13.5px; word-break:break-word }
+  #verdict{ margin-top:26px; padding:18px 20px; border-radius:2px; font-size:15px; }
+  #verdict.good{ background:#E4F0E8; border:1px solid #2E7D4F }
+  #verdict.fail{ background:#F7E4E2; border:1px solid #B3261E }
+  #cube{ margin-top:26px; width:100%; max-width:420px; aspect-ratio:16/10; background:#131009; border:1px solid rgba(27,23,19,.14); }
+  code{ font-size:12.5px; background:rgba(27,23,19,.06); padding:2px 5px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Royal Majestic, 3D check</h1>
+  <p class="sub">This page tests the same things the suite needs. Screenshot it and send it back.</p>
+  <div id="rows"></div>
+  <div id="verdict">Running…</div>
+  <canvas id="cube"></canvas>
+  <p class="sub" style="margin-top:12px">If the black box above shows a slowly turning gold block, 3D works in this browser.</p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
+<script>
+(function () {
+  var rows = document.getElementById("rows");
+  var fails = [];
+
+  function row(state, key, value) {
+    var d = document.createElement("div");
+    d.className = "row";
+    d.innerHTML = '<span class="dot ' + state + '">' + (state === "ok" ? "✓" : state === "bad" ? "!" : "?") + '</span>' +
+                  '<span><span class="k">' + key + '</span><br><span class="v">' + value + '</span></span>';
+    rows.appendChild(d);
+    if (state === "bad") fails.push(key);
+  }
+
+  row("ok", "Page opened from", location.protocol === "file:"
+    ? "file:// (works, but http://localhost:8899 is closer to the real thing)"
+    : location.origin);
+
+  row("ok", "Browser", navigator.userAgent);
+
+  if (window.THREE) row("ok", "three.js loaded", "revision " + THREE.REVISION);
+  else row("bad", "three.js loaded", "NO. Something is blocking cdn.jsdelivr.net: an ad blocker, a VPN, or no connection.");
+
+  var gl = null, glErr = "";
+  try {
+    var c = document.createElement("canvas");
+    gl = c.getContext("webgl2") || c.getContext("webgl");
+  } catch (e) { glErr = e.message; }
+
+  if (gl) {
+    var dbg = gl.getExtension("WEBGL_debug_renderer_info");
+    row("ok", "WebGL available", "yes");
+    row("ok", "Graphics", gl.getParameter(dbg ? dbg.UNMASKED_RENDERER_WEBGL : gl.RENDERER));
+  } else {
+    row("bad", "WebGL available", "NO. " + (glErr || "This browser has WebGL disabled. In Safari check Settings, Advanced, and in Firefox check webgl.disabled in about:config."));
+  }
+
+  row("ok", "Screen", window.innerWidth + " x " + window.innerHeight +
+      "  (device pixel ratio " + (window.devicePixelRatio || 1) + ")");
+
+  // draw an actual lit object, the same way the suite does
+  var drew = false, drawErr = "";
+  if (window.THREE && gl) {
+    try {
+      var cv = document.getElementById("cube");
+      var r = new THREE.WebGLRenderer({ canvas: cv, antialias: true, preserveDrawingBuffer: true });
+      r.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      function size() {
+        var b = cv.getBoundingClientRect();
+        r.setSize(b.width, b.height, false);
+        cam.aspect = b.width / b.height; cam.updateProjectionMatrix();
+      }
+      var sc = new THREE.Scene(); sc.background = new THREE.Color(0x131009);
+      var cam = new THREE.PerspectiveCamera(50, 1.6, .1, 50);
+      cam.position.set(2.4, 2, 3);  cam.lookAt(0, 0, 0);
+      sc.add(new THREE.AmbientLight(0xffffff, 1.1));
+      var dl = new THREE.DirectionalLight(0xffe0b0, 3); dl.position.set(3, 4, 2); sc.add(dl);
+      var m = new THREE.Mesh(new THREE.BoxGeometry(1.5, 1.5, 1.5),
+                new THREE.MeshStandardMaterial({ color: 0xC9982F, roughness: .35, metalness: .4 }));
+      sc.add(m);
+      size();
+      window.addEventListener("resize", size);
+      (function spin() {
+        requestAnimationFrame(spin);
+        m.rotation.y += .006; m.rotation.x += .002;
+        r.render(sc, cam);
+      })();
+      // read a pixel back, so we know it truly drew rather than just not erroring
+      var px = new Uint8Array(4), g2 = r.getContext();
+      r.render(sc, cam);
+      g2.readPixels(2, 2, 1, 1, g2.RGBA, g2.UNSIGNED_BYTE, px);
+      drew = true;
+      row("ok", "Test render", "drew a lit object, background pixel rgba(" + px.join(",") + ")");
+    } catch (e) {
+      drawErr = e.message;
+      row("bad", "Test render", "threw: " + e.message);
+    }
+  } else {
+    row("wait", "Test render", "skipped, the checks above have to pass first");
+  }
+
+  var v = document.getElementById("verdict");
+  if (drew) {
+    v.className = "good";
+    v.innerHTML = "<b>3D works in this browser.</b> If the suite on the main page still shows a photo instead, " +
+      "it is a caching problem. Open <code>http://localhost:8899/index.html</code> and hard reload with " +
+      "<b>Cmd + Shift + R</b>, or open it in a private window.";
+  } else {
+    v.className = "fail";
+    v.innerHTML = "<b>3D cannot run here.</b> Blocking issue: " + fails.join(", ") +
+      (drawErr ? ("<br>Renderer error: " + drawErr) : "") +
+      "<br>Send this screenshot back and I will work around it.";
+  }
+})();
+</script>
+</body>
+</html>
