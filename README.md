@@ -3,7 +3,7 @@
 A pitch mockup for a redesign of [royalmajestichotel.co.za](https://royalmajestichotel.co.za).
 Three properties: Rosebank, Sandton, Durban.
 
-Not the live site. Not signed work. Private for a reason, see [Assets](#assets).
+Not the live site, and not affiliated with the hotel group. See [Assets](#assets).
 
 ---
 
@@ -120,25 +120,6 @@ room types.
 
 ---
 
-## Client context
-
-Verified at source, [Tourism Update, 20 Feb 2026](https://www.tourismupdate.co.za/article/hilton-durban-closes-its-doors):
-
-- Royal Majestic **Rosebank** is the former **Hyatt Regency Johannesburg**.
-- Royal Majestic **Durban** is the former **Hilton Durban**, which closed on
-  5 February 2026 when the Hilton management agreement ended.
-- Owner is African American Properties Hotel Pty, a subsidiary of the
-  **Bin Otaiba Hotel Group**.
-
-This is the commercial argument. They gave up the flags, and with them the global
-booking engine, the loyalty programme and the borrowed trust. The website is now
-the only brand asset carrying a 244 room group across two cities.
-
-Financial Mail has also run critical coverage of the Rosebank property. Do not
-repeat that to the client. Use it to explain why the site has to carry trust now.
-
----
-
 ## Before this goes near the client
 
 - [ ] **The G20 photo** in the events section. Whose is it, and can they use it?
@@ -154,6 +135,11 @@ repeat that to the client. Use it to explain why the site has to carry trust now
 
 ## Assets
 
-`assets/` holds photography and the logo taken from the client's own public
-website, used here to mock up their redesign. They are the client's property.
-This repository is private and the contents are not licensed for redistribution.
+`assets/` holds photography and the logo taken from Royal Majestic's own public
+website, reproduced here only to mock up a redesign of that site. **They remain
+the property of Royal Majestic Hotels** and are not licensed for reuse.
+
+This is an unsigned concept, not affiliated with or endorsed by the hotel group.
+The site carries `noindex` and a `robots.txt` disallow so it cannot surface in a
+search for the real hotel. If Royal Majestic would like anything here taken
+down, open an issue and it goes immediately.
