@@ -9,7 +9,7 @@
      It must never be indexed or turn up in a search for the real hotel. -->
 <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
 
-<script>document.documentElement.className += " js";</script>
+
 <script>
 window.__rmErrors = [];
 window.addEventListener("error", function (e) {
@@ -114,7 +114,7 @@ h3.display{ font-size:clamp(1.7rem, 2.8vw, 2.4rem); font-weight:400; }
 .explore{
   display:inline-block; margin-top:22px;
   font-size:11px; text-transform:uppercase; letter-spacing:.32em; font-weight:500;
-  padding:16px 4px 12px; position:relative;
+  padding:15px 4px 11px; position:relative;
 }
 .explore::after{
   content:""; position:absolute; left:0; right:0; bottom:0; height:1px;
@@ -503,9 +503,7 @@ h3.display{ font-size:clamp(1.7rem, 2.8vw, 2.4rem); font-weight:400; }
   .cnc__bar{ padding:17px 18px; }
   .cnc__res{ padding:18px; }
   .msg{ max-width:94%; }
-  .foot li a{ display:inline-block; padding-block:11px; }
-  .tel a{ display:block; padding-block:7px; }
-  .foot ul{ gap:2px; }
+  .foot li a, .tel a{ display:inline-block; padding-block:4px; }
   .foot{ padding-block:52px 34px; }
 }
 
@@ -519,174 +517,8 @@ h3.display{ font-size:clamp(1.7rem, 2.8vw, 2.4rem); font-weight:400; }
 }
 </style>
 </head>
-<body>
-
-<div class="pre" id="pre">
-  <img class="pre__mark" src="assets/Royal-Majestic-Logo-Transparent-1.png" alt="Royal Majestic Hotels">
-  <div class="pre__rail"><div class="pre__bar" id="preBar"></div></div>
-  <div class="pre__num"><span id="preNum">00</span></div>
-</div>
-
-<div id="top-sentinel" aria-hidden="true" style="position:absolute;top:0;left:0;height:90px;width:1px;pointer-events:none"></div>
-
-<header class="nav" id="nav">
-  <div class="nav__inner">
-    <button class="nav__burger" id="navToggle" type="button" aria-label="Open the menu" aria-expanded="false" aria-controls="menu">
-      <span></span><span></span>
-    </button>
-    <a class="nav__brand" href="#hero" aria-label="Royal Majestic Hotels, home">
-      <img src="assets/Royal-Majestic-Logo-Transparent-1.png" alt="">
-      <span>Royal Majestic</span>
-    </a>
-    <div class="nav__cta">
-      <a class="btn btn-line" href="#concierge">Book</a>
-    </div>
-  </div>
-</header>
-
-<nav class="menu" id="menu" aria-label="Mobile" aria-hidden="true">
-  <button class="menu__close" id="menuClose" type="button" aria-label="Close the menu"><i class="ph ph-x"></i></button>
-  <div>
-    <a class="menu__link" href="#suite">The Suite</a>
-    <a class="menu__link" href="#rosebank">Rosebank</a>
-    <a class="menu__link" href="#sandton">Sandton</a>
-    <a class="menu__link" href="#durban">Durban</a>
-    <a class="menu__link" href="#dining">Dining</a>
-    <a class="menu__link" href="#events">Events</a>
-    <a class="menu__link" href="#concierge">Concierge</a>
-  </div>
-  <div class="menu__tels">
-    <a href="tel:+27100190000">Rosebank <span>010 019 0000</span></a>
-    <a href="tel:+27100225825">Sandton <span>0100 225 825</span></a>
-    <a href="tel:+27318808100">Durban <span>031 880 8100</span></a>
-  </div>
-</nav>
-
-<main>
-
-  <!-- ================= HERO ================= -->
-  <section class="stagey hero" id="hero">
-    <div class="stagey__bg"><img id="heroImg" src="assets/2023-12-12.jpg.jpg" alt="The courtyard at Royal Majestic Rosebank at dusk" fetchpriority="high"></div>
-    <div class="stagey__scrim"></div>
-    <div class="stagey__copy">
-      <img class="hero__mark rv" src="assets/Royal-Majestic-Logo-Transparent-1.png" alt="">
-      <p class="kicker rv d1">Royal Majestic Hotels</p>
-      <h1 class="display rv d2">This is<br>the one.</h1>
-      <p class="line rv d3">Three hotels across Johannesburg and Durban.</p>
-      <div class="hero__cta rv d4">
-        <a class="btn btn-gold" href="#concierge">Check availability</a>
-        <a class="btn btn-line" href="#suite">Walk the suite</a>
-      </div>
-    </div>
-    <div class="hero__rule" aria-hidden="true"></div>
-  </section>
-
-  <!-- ================= THE SUITE, live 3D ================= -->
-  <section class="stagey suite" id="suite">
-    <div class="stagey__bg">
-      <div class="room" id="room3d"></div>
-      <div class="glfail" id="glFail" hidden>
-        <img src="assets/ChatGPT-Image-Jun-4-2026-09_28_55-PM.png" alt="An executive suite">
-        <p class="note" style="color:var(--light-mute)">The 3D suite did not start in this browser, so here is the room in a photograph.</p>
-        <code id="glWhy"></code>
-      </div>
-    </div>
-    <div class="stagey__scrim"></div>
-    <div class="spots" id="room3dSpots"></div>
-
-    <div class="stagey__copy">
-      <p class="kicker rv">Stay</p>
-      <h2 class="display rv d1">Walk it before you book it.</h2>
-      <p class="line rv d2">A model of the room you can move through, not a gallery you scroll past.</p>
-    </div>
-
-    <div class="stage__hint"><i class="ph ph-hand-grabbing"></i> Drag to look around</div>
-
-    <div class="suite__ui">
-      <div class="wrap">
-        <div class="tour__tabs" role="tablist" aria-label="Viewpoints">
-          <button class="tab" role="tab" aria-selected="true" data-view="doorway">Doorway</button>
-          <button class="tab" role="tab" aria-selected="false" data-view="bed">Bedside</button>
-          <button class="tab" role="tab" aria-selected="false" data-view="desk">Desk</button>
-          <button class="tab" role="tab" aria-selected="false" data-view="window">Window</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= ROSEBANK ================= -->
-  <section class="stagey" id="rosebank">
-    <div class="stagey__bg"><img src="assets/Z92_9278.jpg" alt="The double volume lounge at Royal Majestic Rosebank"></div>
-    <div class="stagey__scrim"></div>
-    <div class="stagey__copy">
-      <p class="kicker rv">Johannesburg</p>
-      <h2 class="display rv d1">Rosebank</h2>
-      <p class="line rv d2">244 rooms and suites, a few minutes from the Gautrain and a walk from The Zone.</p>
-      <a class="explore rv d3" href="#concierge">Explore</a>
-    </div>
-  </section>
-
-  <!-- ================= SANDTON ================= -->
-  <section class="stagey" id="sandton">
-    <div class="stagey__bg"><img src="assets/5cf2a707-1eb1-4631-93fe-43ed5dcae85a.png" alt="Majestic Hotel Sandton"></div>
-    <div class="stagey__scrim"></div>
-    <div class="stagey__copy">
-      <p class="kicker rv">Johannesburg</p>
-      <h2 class="display rv d1">Sandton</h2>
-      <p class="line rv d2">In the middle of the business district, for people who came here to work.</p>
-      <a class="explore rv d3" href="#concierge">Explore</a>
-    </div>
-  </section>
-
-  <!-- ================= DURBAN ================= -->
-  <section class="stagey" id="durban">
-    <div class="stagey__bg"><img src="assets/hilton-durban-view-590x390-1.jpg" alt="Royal Majestic Durban"></div>
-    <div class="stagey__scrim"></div>
-    <div class="stagey__copy">
-      <p class="kicker rv">KwaZulu-Natal</p>
-      <h2 class="display rv d1">Durban</h2>
-      <p class="line rv d2">Eleven meeting venues, two spas and an outdoor pool, close to the beachfront.</p>
-      <a class="explore rv d3" href="#concierge">Explore</a>
-    </div>
-  </section>
-
-  <!-- ================= DINING ================= -->
-  <section class="stagey" id="dining">
-    <div class="stagey__bg"><img src="assets/durbanlocation.jpg" alt="The open air restaurant under string lights"></div>
-    <div class="stagey__scrim"></div>
-    <div class="stagey__copy">
-      <p class="kicker rv">The Table</p>
-      <h2 class="display rv d1">Dinner is downstairs.</h2>
-      <p class="line rv d2">Citrus cooks to order. The Lounge pours from late morning.</p>
-      <a class="explore rv d3" href="#concierge">Explore</a>
-    </div>
-  </section>
-
-  <!-- ================= THE BAR ================= -->
-  <section class="stagey" id="bar">
-    <div class="stagey__bg"><img src="assets/Z92_9598.jpg" alt="Three cocktails on the bar"></div>
-    <div class="stagey__scrim"></div>
-    <div class="stagey__copy">
-      <p class="kicker rv">After Six</p>
-      <h2 class="display rv d1">The long way home.</h2>
-      <p class="line rv d2">A bar worth staying downstairs for.</p>
-      <a class="explore rv d3" href="#concierge">Explore</a>
-    </div>
-  </section>
-
-  <!-- ================= EVENTS ================= -->
-  <section class="stagey" id="events">
-    <div class="stagey__bg"><img src="assets/7.jpeg" alt="A banqueting hall set for a long table dinner"></div>
-    <div class="stagey__scrim"></div>
-    <div class="stagey__copy">
-      <p class="kicker rv">Gather</p>
-      <h2 class="display rv d1">The room behind the room.</h2>
-      <p class="line rv d2">Delegations, plenaries, gala dinners and weddings, with the team to run them.</p>
-      <a class="explore rv d3" href="#concierge">Explore</a>
-    </div>
-  </section>
-
-  <!-- ================= CONCIERGE ================= -->
+<body class="is-ready">
+<main><!-- ================= CONCIERGE ================= -->
   <section class="band band--paper" id="concierge">
     <div class="wrap">
       <div class="cnc__head">
@@ -790,7 +622,7 @@ h3.display{ font-size:clamp(1.7rem, 2.8vw, 2.4rem); font-weight:400; }
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
-<script src="room.js?v=12"></script>
-<script src="site.js?v=12"></script>
+<script src="room.js?v=11"></script>
+<script src="site.js?v=11"></script>
 </body>
 </html>

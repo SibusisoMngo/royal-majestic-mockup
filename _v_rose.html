@@ -9,7 +9,7 @@
      It must never be indexed or turn up in a search for the real hotel. -->
 <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
 
-<script>document.documentElement.className += " js";</script>
+
 <script>
 window.__rmErrors = [];
 window.addEventListener("error", function (e) {
@@ -519,102 +519,8 @@ h3.display{ font-size:clamp(1.7rem, 2.8vw, 2.4rem); font-weight:400; }
 }
 </style>
 </head>
-<body>
-
-<div class="pre" id="pre">
-  <img class="pre__mark" src="assets/Royal-Majestic-Logo-Transparent-1.png" alt="Royal Majestic Hotels">
-  <div class="pre__rail"><div class="pre__bar" id="preBar"></div></div>
-  <div class="pre__num"><span id="preNum">00</span></div>
-</div>
-
-<div id="top-sentinel" aria-hidden="true" style="position:absolute;top:0;left:0;height:90px;width:1px;pointer-events:none"></div>
-
-<header class="nav" id="nav">
-  <div class="nav__inner">
-    <button class="nav__burger" id="navToggle" type="button" aria-label="Open the menu" aria-expanded="false" aria-controls="menu">
-      <span></span><span></span>
-    </button>
-    <a class="nav__brand" href="#hero" aria-label="Royal Majestic Hotels, home">
-      <img src="assets/Royal-Majestic-Logo-Transparent-1.png" alt="">
-      <span>Royal Majestic</span>
-    </a>
-    <div class="nav__cta">
-      <a class="btn btn-line" href="#concierge">Book</a>
-    </div>
-  </div>
-</header>
-
-<nav class="menu" id="menu" aria-label="Mobile" aria-hidden="true">
-  <button class="menu__close" id="menuClose" type="button" aria-label="Close the menu"><i class="ph ph-x"></i></button>
-  <div>
-    <a class="menu__link" href="#suite">The Suite</a>
-    <a class="menu__link" href="#rosebank">Rosebank</a>
-    <a class="menu__link" href="#sandton">Sandton</a>
-    <a class="menu__link" href="#durban">Durban</a>
-    <a class="menu__link" href="#dining">Dining</a>
-    <a class="menu__link" href="#events">Events</a>
-    <a class="menu__link" href="#concierge">Concierge</a>
-  </div>
-  <div class="menu__tels">
-    <a href="tel:+27100190000">Rosebank <span>010 019 0000</span></a>
-    <a href="tel:+27100225825">Sandton <span>0100 225 825</span></a>
-    <a href="tel:+27318808100">Durban <span>031 880 8100</span></a>
-  </div>
-</nav>
-
-<main>
-
-  <!-- ================= HERO ================= -->
-  <section class="stagey hero" id="hero">
-    <div class="stagey__bg"><img id="heroImg" src="assets/2023-12-12.jpg.jpg" alt="The courtyard at Royal Majestic Rosebank at dusk" fetchpriority="high"></div>
-    <div class="stagey__scrim"></div>
-    <div class="stagey__copy">
-      <img class="hero__mark rv" src="assets/Royal-Majestic-Logo-Transparent-1.png" alt="">
-      <p class="kicker rv d1">Royal Majestic Hotels</p>
-      <h1 class="display rv d2">This is<br>the one.</h1>
-      <p class="line rv d3">Three hotels across Johannesburg and Durban.</p>
-      <div class="hero__cta rv d4">
-        <a class="btn btn-gold" href="#concierge">Check availability</a>
-        <a class="btn btn-line" href="#suite">Walk the suite</a>
-      </div>
-    </div>
-    <div class="hero__rule" aria-hidden="true"></div>
-  </section>
-
-  <!-- ================= THE SUITE, live 3D ================= -->
-  <section class="stagey suite" id="suite">
-    <div class="stagey__bg">
-      <div class="room" id="room3d"></div>
-      <div class="glfail" id="glFail" hidden>
-        <img src="assets/ChatGPT-Image-Jun-4-2026-09_28_55-PM.png" alt="An executive suite">
-        <p class="note" style="color:var(--light-mute)">The 3D suite did not start in this browser, so here is the room in a photograph.</p>
-        <code id="glWhy"></code>
-      </div>
-    </div>
-    <div class="stagey__scrim"></div>
-    <div class="spots" id="room3dSpots"></div>
-
-    <div class="stagey__copy">
-      <p class="kicker rv">Stay</p>
-      <h2 class="display rv d1">Walk it before you book it.</h2>
-      <p class="line rv d2">A model of the room you can move through, not a gallery you scroll past.</p>
-    </div>
-
-    <div class="stage__hint"><i class="ph ph-hand-grabbing"></i> Drag to look around</div>
-
-    <div class="suite__ui">
-      <div class="wrap">
-        <div class="tour__tabs" role="tablist" aria-label="Viewpoints">
-          <button class="tab" role="tab" aria-selected="true" data-view="doorway">Doorway</button>
-          <button class="tab" role="tab" aria-selected="false" data-view="bed">Bedside</button>
-          <button class="tab" role="tab" aria-selected="false" data-view="desk">Desk</button>
-          <button class="tab" role="tab" aria-selected="false" data-view="window">Window</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= ROSEBANK ================= -->
+<body class="is-ready">
+<main><!-- ================= ROSEBANK ================= -->
   <section class="stagey" id="rosebank">
     <div class="stagey__bg"><img src="assets/Z92_9278.jpg" alt="The double volume lounge at Royal Majestic Rosebank"></div>
     <div class="stagey__scrim"></div>
@@ -790,7 +696,7 @@ h3.display{ font-size:clamp(1.7rem, 2.8vw, 2.4rem); font-weight:400; }
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
-<script src="room.js?v=12"></script>
-<script src="site.js?v=12"></script>
+<script src="room.js?v=11"></script>
+<script src="site.js?v=11"></script>
 </body>
 </html>

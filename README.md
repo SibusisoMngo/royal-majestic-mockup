@@ -60,6 +60,12 @@ accent anywhere on the page.
 
 **Shapes.** Surfaces are 2px. Anything you tap is a pill.
 
+**Mobile is audited, not assumed.** Measured at 360, 390 and 430px: no
+horizontal scroll, every tap target at least 44px, and each panel exactly one
+screen tall. Two bugs that audit caught: the concierge chat column sat 16px
+wider than its card because grid children default to `min-width:auto`, and
+panel copy was illegible over photography on a narrow screen.
+
 **Motion has to earn its place.** Scroll weight from Lenis, every panel image
 easing out of a slight push in as it passes, copy drifting slower than the panel
 it sits on, and the reveal cascade. Everything degrades under `prefers-reduced-motion`. There are no scroll

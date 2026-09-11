@@ -9,7 +9,7 @@
      It must never be indexed or turn up in a search for the real hotel. -->
 <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
 
-<script>document.documentElement.className += " js";</script>
+
 <script>
 window.__rmErrors = [];
 window.addEventListener("error", function (e) {
@@ -790,7 +790,56 @@ h3.display{ font-size:clamp(1.7rem, 2.8vw, 2.4rem); font-weight:400; }
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
-<script src="room.js?v=12"></script>
-<script src="site.js?v=12"></script>
-</body>
+<script src="room.js?v=11"></script>
+<script src="site.js?v=11"></script>
+<div id="rep" style="position:fixed;z-index:99999;inset:0 0 auto 0;background:#0a0a0a;color:#0f0;font:11px/1.4 monospace;padding:8px;white-space:pre-wrap"></div>
+<script>
+(function(){
+  document.body.offsetHeight;
+  var vw = document.documentElement.clientWidth, out = [];
+  out.push("viewport=" + vw + "  scrollWidth=" + document.documentElement.scrollWidth);
+  out.push("horizontal scroll: " + (document.documentElement.scrollWidth > vw + 1 ? "*** YES, BAD ***" : "none"));
+
+  function name(e){
+    return e.tagName.toLowerCase()
+      + (e.id ? "#"+e.id : "")
+      + (typeof e.className === "string" && e.className.trim()
+          ? "."+e.className.trim().split(/\s+/).slice(0,2).join(".") : "");
+  }
+
+  // anything poking outside the viewport
+  var over = [];
+  document.querySelectorAll("body *").forEach(function(e){
+    if (e.closest("#rep")) return;
+    var r = e.getBoundingClientRect();
+    if (r.width === 0 && r.height === 0) return;
+    if (getComputedStyle(e).position === "fixed") return;
+    if (r.right > vw + 1.5 || r.left < -1.5) over.push(name(e) + " ["+r.left.toFixed(0)+".."+r.right.toFixed(0)+"]");
+  });
+  out.push("overflowing: " + over.length + (over.length ? "\n   " + over.slice(0,8).join("\n   ") : ""));
+
+  // tap targets under 44px
+  var small = [];
+  document.querySelectorAll("a,button,input,[role=tab]").forEach(function(e){
+    if (e.closest("#rep") || e.closest(".menu")) return;
+    var r = e.getBoundingClientRect();
+    if (r.width === 0 || r.height === 0) return;
+    if (r.height < 44 || r.width < 24) small.push(name(e) + " " + r.width.toFixed(0)+"x"+r.height.toFixed(0));
+  });
+  out.push("tap targets under 44px high: " + small.length + (small.length ? "\n   " + small.slice(0,10).join("\n   ") : ""));
+
+  // panels should each be exactly one screen tall
+  var p = document.querySelectorAll(".stagey");
+  out.push("panels=" + p.length + "  first panel h=" + p[0].getBoundingClientRect().height.toFixed(0) + "  innerHeight=" + window.innerHeight);
+  document.getElementById("rep").textContent = out.join("\n");
+})();
+</script></body>
+</html>
+
+</html>
+
+</html>
+
+</html>
+
 </html>
