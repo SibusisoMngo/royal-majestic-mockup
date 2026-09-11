@@ -155,30 +155,32 @@
     gsap.registerPlugin(ScrollTrigger);
 
     if (!reduce) {
-      /* every panel image eases out of a slight push in as it passes.
-         Motivation: storytelling. It is the one move that makes a run of
-         full bleed photographs read as a sequence rather than a slideshow. */
-      gsap.utils.toArray(".stagey__bg img").forEach(function (img) {
-        var panel = img.closest(".stagey");
-        gsap.fromTo(img,
-          { scale: 1.18 },
-          { scale: 1, ease: "none",
-            scrollTrigger: { trigger: panel, start: "top bottom", end: "bottom top", scrub: true } });
-      });
-
-      /* the copy drifts up a little slower than the panel it sits on.
-         Motivation: depth. */
-      gsap.utils.toArray(".stagey:not(.suite) .stagey__copy").forEach(function (copy) {
-        gsap.to(copy, {
-          yPercent: -14, ease: "none",
-          scrollTrigger: { trigger: copy.closest(".stagey"), start: "top bottom", end: "bottom top", scrub: true }
+      /* The panels pin. As the next one rises over the current one, the current
+         one eases back and dims, so the stack reads as depth rather than as a
+         pile of screenshots. This is the whole feel of the page. */
+      var panels = gsap.utils.toArray(".stagey");
+      panels.forEach(function (panel, i) {
+        if (i === panels.length - 1) return;
+        var next = panels[i + 1];
+        gsap.to(panel, {
+          scale: 0.92, opacity: 0.45, ease: "none",
+          scrollTrigger: { trigger: next, start: "top bottom", end: "top top", scrub: true }
         });
       });
 
-      /* the hero holds while the next panel arrives over it */
+      /* a slow push in while a panel is the one you are looking at, so a held
+         frame still breathes */
+      gsap.utils.toArray(".stagey__bg img").forEach(function (img) {
+        gsap.fromTo(img, { scale: 1.12 }, {
+          scale: 1, ease: "none",
+          scrollTrigger: { trigger: img.closest(".stagey"), start: "top bottom", end: "bottom top", scrub: true }
+        });
+      });
+
+      /* the hero copy lifts away as the suite arrives over it */
       gsap.to("#hero .stagey__copy", {
-        opacity: 0, yPercent: -22, ease: "none",
-        scrollTrigger: { trigger: "#hero", start: "top top", end: "bottom top", scrub: true }
+        opacity: 0, y: -40, ease: "none",
+        scrollTrigger: { trigger: "#suite", start: "top bottom", end: "top top", scrub: true }
       });
     }
   }
