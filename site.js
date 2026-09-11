@@ -104,7 +104,7 @@
   var nav = document.getElementById("nav");
   new IntersectionObserver(function (en) {
     nav.classList.toggle("is-stuck", !en[0].isIntersecting);
-  }, { rootMargin: "-40px 0px 0px 0px" }).observe(document.getElementById("top-sentinel"));
+  }, { threshold: 0 }).observe(document.getElementById("top-sentinel"));
 
   /* ============================================================
      MOBILE MENU
